@@ -13,22 +13,33 @@ use Illuminate\Queue\SerializesModels;
 class Hello implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+    public $message;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    // public function __construct()
+    // {
+    //     //
+    // }
+
+    public function __construct($message)
     {
-        //
+        $this->message  = $message;
     }
+
+    // public function broadcastWith()
+    // {
+    //     return [
+    //         'hello' => 'there'
+    //     ];
+    // }
 
     public function broadcastWith()
     {
-        return [
-            'hello' => 'there'
-        ];
+        return ['message' => $this->message];
     }
 
     /**
@@ -38,6 +49,12 @@ class Hello implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('channel');
+        return new Channel('public-channel');
     }
+
+    // public function broadcastOn()
+    // {
+    //     return new PrivateChannel('chat.' . $this->message->to);
+    // }
+
 }

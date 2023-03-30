@@ -824,6 +824,9 @@ Route::apiResource('report', ReportController::class);
 
 // chat routes
 Route::get('user-message/{userId}/{authUserId}', [MessageController::class, 'userMessage'])->name('user.message');
+Route::post('send-message', [MessageController::class, 'sendMessage'])->name('user.message.send');
+Route::delete('delete-single-message/{messageId}', [MessageController::class, 'deleteSingleMessage'])->name('user.single.message.delete');
+Route::delete('delete-all-message/{userId}/{authUserId}', [MessageController::class, 'deleteAllMessage'])->name('user.all.message.delete');
 
 
 
